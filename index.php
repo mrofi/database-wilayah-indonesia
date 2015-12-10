@@ -23,17 +23,6 @@ function service($params = [])
 	foreach ($dom['tr.table_content'] as $content) 
 	{
 	 	$data = pq($content)->find('td');
-	 	$result[] = $data;
-	 }
-	
- 	return $result;
-}
-
-function parse($service)
-{
-	$result = [];
-
-	foreach ($service as $data) {
 	 	$propinsi_id = (int) trim(pq($data)->eq(1)->html());
 	 	$propinsi_name = trim(pq($data)->eq(2)->html());
 	 	$kabupaten_id = (int) trim(pq($data)->eq(3)->html());
@@ -44,38 +33,43 @@ function parse($service)
 	 	$desa_name = trim(pq($data)->eq(8)->html());
 	 	$result[] = compact(['propinsi_id', 'propinsi_name', 'kabupaten_id', 'kabupaten_name', 'kecamatan_id', 'kecamatan_name', 'desa_id', 'desa_name']);
 	}
-
-	return $result;
+	
+ 	return $result;
 }
 
 function getPropinsi($keyword = '')
 {	
 	$params = ['kata_kunci' => $keyword, 'pilihcari' => 'prop'];
-	return parse(service($params));
+	return service($params);
 }
 
 function getKabupaten($keyword = '')
 {	
 	$params = ['kata_kunci' => $keyword, 'pilihcari' => 'kab'];
-	return parse(service($params));
+	return service($params);
 }
 
 function getKecamatan($keyword = '')
 {	
 	$params = ['kata_kunci' => $keyword, 'pilihcari' => 'kec'];
-	return parse(service($params));
+	return service($params);
 }
 
 function getDesa($keyword = '')
 {	
 	$params = ['kata_kunci' => $keyword, 'pilihcari' => 'desa'];
-	return parse(service($params));
+	return service($params);
 }
 
 
+?>
+<h3>Example : Search data for 'Jawa' and 'Pekalongan'</h3>
+<pre>
 
+<?php
 var_dump(getPropinsi('jawa'));
 var_dump(getKabupaten('pekalongan'));
 var_dump(getKecamatan('pekalongan'));
 var_dump(getDesa('pekalongan'));
-
+?>
+</pre>
