@@ -67,7 +67,7 @@ function getDesa($keyword = '')
 <pre>
 
 <?php
-var_dump(getPropinsi('jawa'));
+var_dump(getPropinsi('aceh'));
 var_dump(getKabupaten('pekalongan'));
 var_dump(getKecamatan('pekalongan'));
 var_dump(getDesa('pekalongan'));
