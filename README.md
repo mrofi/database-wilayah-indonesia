@@ -14,6 +14,11 @@ Buka browser Akses ke **http://localhost:8989**
 
 Buka file index.php untuk tau tentang scriptnya.
 
+### Tambahan
+Cek KTP
+
+URL : http://localhost:8000/ktp.php?nik=xxxxxxxxxxxxxxxx
+
 ### Any Question?
 Fell free to hit the issue button
 

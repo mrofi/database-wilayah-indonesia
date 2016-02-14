@@ -30,8 +30,12 @@ function service($nik)
 	foreach (pq('div.form') as $content) 
 	{
 
-	 	$key = trim(pq($content)->find('.label')->eq(0)->html());
-	 	$value = trim(pq($content)->find('.field')->eq(0)->html());
+	 	$key = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', rtrim(trim(pq($content)->find('.label')->eq(0)->html()), ':'));
+	 	$value = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', rtrim(trim(pq($content)->find('.field')->eq(0)->html()), ':'));
+
+	 	if (empty($key)) {
+	 		continue;
+	 	}
 
 	 	$result[$key] = $value;
 	}
