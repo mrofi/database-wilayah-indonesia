@@ -3,8 +3,20 @@
 require 'vendor/autoload.php';
 require 'phpquery-master/phpQuery/phpQuery.php';
 
-function service($nik)
+
+/**
+ * Convert a string to snake case.
+ *
+ * @param  string  $value
+ * @param  string  $delimiter
+ * @return string
+ */
+function snake($value, $delimiter = '_')
 {
+    return implode('_', explode(' ', strtolower(str_replace('/', ' ', $value))));
+}
+
+function service($nik) {
 	$default = ['wilayah_id' => '0', 'g-recaptcha-response' => '000', 'cmd' => 'Cari.', 'page' => '',  'nik_global' => $nik];
 
 	$params = $default;
@@ -30,7 +42,7 @@ function service($nik)
 	foreach (pq('div.form') as $content) 
 	{
 
-	 	$key = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', rtrim(trim(pq($content)->find('.label')->eq(0)->html()), ':'));
+	 	$key = snake(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', rtrim(trim(pq($content)->find('.label')->eq(0)->html()), ':')));
 	 	$value = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', rtrim(trim(pq($content)->find('.field')->eq(0)->html()), ':'));
 
 	 	if (empty($key)) {
